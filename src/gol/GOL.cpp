@@ -108,6 +108,24 @@ bool GOL::valid(int x, int y)
      }
 }
 
+Point<int> GOL::wrap(Point<int> in)
+{
+     Point<int> point(in.x,in.y);
+
+     if (in.x < 0) {
+          point.x = x_width_-1;
+     } else if (in.x >= x_width_) {
+          point.x = 0;
+     }
+
+     if (in.y < 0) {
+          point.y = y_height_-1;
+     } else if (in.y >= y_height_) {
+          point.y = 0;
+     }
+     return point;
+}
+
 int GOL::neighbor_count(int x, int y)
 {
      int neighbors = 0;     
@@ -115,10 +133,10 @@ int GOL::neighbor_count(int x, int y)
      std::vector<Direction>::iterator dir_it;
      for (dir_it = directions_.begin(); dir_it != directions_.end(); dir_it++) {
           Point<int> point;
-          point = map_[x][y]->point() + dir_it->point();
-          
-          if (this->valid(point.x,point.y) &&
-              map_[point.x][point.y]->grid_type() == Node::occupied) {
+          point = this->wrap(map_[x][y]->point() + dir_it->point());                    
+     
+          //if (this->valid(point.x,point.y) &&
+          if (map_[point.x][point.y]->grid_type() == Node::occupied) {
                neighbors++;
           }
      }        

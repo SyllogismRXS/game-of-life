@@ -4,7 +4,7 @@
 /// @file GOL.h
 /// @author Kevin DeMarco <kevin.demarco@gmail.com>
 ///
-/// Time-stamp: <2013-12-18 01:20:21 syllogismrxs>
+/// Time-stamp: <2013-12-18 08:49:10 syllogismrxs>
 ///
 /// @version 1.0
 /// Created: 26 Nov 2013
@@ -217,6 +217,7 @@ public:
      void step();
 
      bool valid(int x, int y);
+     Point<int> wrap(Point<int> in);
 
 protected:
 
