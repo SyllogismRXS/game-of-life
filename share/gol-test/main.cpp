@@ -1,4 +1,6 @@
 #include <iostream>
+#include <unistd.h>
+
 #include <gol/GOL.h>
 
 using std::endl;
@@ -13,11 +15,11 @@ int main(int argc, char *argv[])
      gol.randomize();
      cout << gol << endl;
 
-     int steps = 1000;
+     int steps = 100;
      for (int i = 0; i < steps; i++) {
           gol.step();
           cout << gol << endl;
-          sleep(1);
+          usleep(500000);
      }
 
      
