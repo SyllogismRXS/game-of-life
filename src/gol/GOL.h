@@ -4,7 +4,7 @@
 /// @file GOL.h
 /// @author Kevin DeMarco <kevin.demarco@gmail.com>
 ///
-/// Time-stamp: <2013-12-18 08:49:10 syllogismrxs>
+/// Time-stamp: <2014-01-12 13:01:12 syllogismrxs>
 ///
 /// @version 1.0
 /// Created: 26 Nov 2013
@@ -187,6 +187,16 @@ public:
 
      void reset()
      {
+          age_ = 0;
+     }
+
+     bool is_new()
+     {
+          if (age_ == 0) {
+               return true;
+          } else {
+               return false;
+          }
      }
      
      bool operator<(const Node &other) 
@@ -194,10 +204,17 @@ public:
           return false;
      }
 
+     void* data() { return data_; }
+     void set_data(void *data) { data_ = data; }
+
+     void inc_age() { age_++; }
+     
 protected:
      Point<int> point_;
      Grid_t grid_type_;
      Grid_t next_grid_type_;
+     void *data_;
+     int age_;
 private:     
 };
 

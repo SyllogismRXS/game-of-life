@@ -60,7 +60,7 @@ Node & GOL::at(int x, int y) const
 
 void GOL::randomize()
 {
-     srand (time(NULL));
+     //srand (time(NULL)); // call this before randomize()
      int num = 0;
      
      for (int x = 0; x < x_width_; x++) {
@@ -83,9 +83,11 @@ void GOL::step()
                if (neighbors < 2) {
                     map_[x][y]->set_next_grid_type(Node::empty);
                } else if (map_[x][y]->grid_type() == Node::empty && neighbors == 3) {
-                    map_[x][y]->set_next_grid_type(Node::occupied);
+                    map_[x][y]->reset();
+                    map_[x][y]->set_next_grid_type(Node::occupied);                    
                } else if (neighbors == 2 || neighbors == 3) {
-                    // nothing happens
+                    // node stays, ages
+                    map_[x][y]->inc_age();
                } else if (neighbors > 3) {
                     map_[x][y]->set_next_grid_type(Node::empty);
                }
@@ -94,7 +96,7 @@ void GOL::step()
 
      for (int x = 0; x < x_width_; x++) {
           for (int y = 0; y < y_height_; y++) {
-               map_[x][y]->update_grid_type();
+               map_[x][y]->update_grid_type();               
           }
      }
 }
